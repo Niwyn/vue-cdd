@@ -205,7 +205,7 @@
 					etp: function(e){
 						return (e/35).toFixed(1);
 					},
-					heureTotal: function(e){
+					heuresTot: function(e){
 						return tabData.nbHebdo/7 ;
 					},
 					daysBetween: function( date1, date2 ) {
@@ -219,10 +219,10 @@
 
 						var difference_ms = date2_ms - date1_ms;
 
-						var laDiff = Math.round(difference_ms/one_day);
-						tabData.nbConges =  parseInt(Math.ceil(parseInt(laDiff/28) * 2.08));
+						var diffJour = Math.round(difference_ms/one_day);
+						tabData.nbConges =  parseInt(Math.ceil(parseInt(diffJour/28) * 2.08));
 						
-						return laDiff;
+						return diffJour;
 					},
 					jours: function(){
 					}
