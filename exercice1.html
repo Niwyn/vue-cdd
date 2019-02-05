@@ -124,14 +124,30 @@
 	                <input type="number" id="nbHebdo" class="form-control" v-model="formData.nbHebdo"/>
 	            </div>
 	        </div>
-
-
-			<div class="infos">
-				<label>Nombre jours de travail : {{daysBetween(tabData.dateDebut, tabData.dateFin)}}</label><br>
-				<label>ETP : {{etp(tabData.nbHebdo)}}</label><br>
-				<label>Nombre de congés obtenus : {{tabData.nbConges}}</label><br>
-				<label>Nombre d'heures travaillées : {{tabData.nbHeures}}</label>
-			</div>
+            <br><br><br>
+            <div class="row">
+                <div class='col-sm-6 offset-3'>
+                    <label>Nombre jours de travail : {{daysBetween(tabData.dateDebut, tabData.dateFin)}}</label>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class='col-sm-6 offset-3'>
+                    <label>ETP : {{etp(tabData.nbHebdo)}}</label>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class='col-sm-6 offset-3'>
+                    <label>Nombre de congés obtenus : {{tabData.nbConges}}</label>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class='col-sm-6 offset-3'>
+                    <label>Nombre d'heures travaillées : {{tabData.nbHeures}}</label>
+                </div>
+            </div>
 		</form>
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.5/vue.min.js"></script>
