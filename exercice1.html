@@ -175,10 +175,10 @@
 
 
 			<div class="infos">
-				<label>Jours total de travail : {{daysBetween(tabData.dateDebut, tabData.dateFin)}}</label><br>
+				<label>Jours de travail : {{daysBetween(tabData.dateDebut, tabData.dateFin)}}</label><br>
 				<label>ETP : {{etp(tabData.nbHebdo)}}</label><br>
-				<label>NB de congés : {{tabData.nbConges}}</label><br>
-				<label> NB D'heure total: </label>
+				<label>Nombre de congés obtenus : {{tabData.nbConges}}</label><br>
+				<label>Nombre d'heures travaillés : </label>
 			</div>
 		</form>
 
@@ -195,7 +195,7 @@
 			tabData.dateFin = new Date();
 			tabData.nbHebdo = 0;
 			tabData.nbConges = 0;
-			tabData.
+			tabData.nbHeures = 0;
 			var demo = new Vue({
 				el: '#main2',
 				data: {
@@ -220,9 +220,8 @@
 						var difference_ms = date2_ms - date1_ms;
 
 						var laDiff = Math.round(difference_ms/one_day);
-						tabData.nbConges =  parseInt(Math.ceil(parseInt(laDiff/28) * 2.08))
+						tabData.nbConges =  parseInt(Math.ceil(parseInt(laDiff/28) * 2.08));
 						
-						console.log( parseInt(Math.ceil(parseInt(laDiff/28) * 2.08)))
 						return laDiff;
 					},
 					jours: function(){
