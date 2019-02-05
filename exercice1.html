@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Vue.js Order Form</title>
+
+		<style>
+    @import url(https://fonts.googleapis.com/css?family=Cookie);
+
+    /* Hide un-compiled mustache bindings
+    until the Vue instance is ready */
+
+    [v-cloak] {
+      display: none;
+    }
+
+    *{
+    	margin:0;
+    	padding:0;
+    }
+
+    body{
+    	font:15px/1.3 'Open Sans', sans-serif;
+    	color: #5e5b64;
+    	text-align:center;
+    }
+
+    a, a:visited {
+    	outline:none;
+    	color:#389dc1;
+    }
+
+    a:hover{
+    	text-decoration:none;
+    }
+
+    section, footer, header, aside, nav{
+    	display: block;
+    }
+
+    /*-------------------------
+    	The order form
+    --------------------------*/
+
+
+    form h1{
+    	color:#fff;
+    	font-size:64px;
+    	font-family:'Cookie', cursive;
+    	font-weight: normal;
+    	line-height:1;
+    	text-shadow:0 3px 0 rgba(0,0,0,0.1);
+    }
+
+    form ul{
+    	list-style:none;
+    	color:#fff;
+    	font-size:20px;
+    	font-weight:bold;
+    	text-align: left;
+    	margin:20px 0 15px;
+    }
+
+    form ul li{
+    	padding:20px 30px;
+    	background-color:#e35885;
+    	margin-bottom:8px;
+    	box-shadow:0 1px 1px rgba(0,0,0,0.1);
+    	cursor:pointer;
+    }
+
+    form ul li span{
+    	float:right;
+    }
+
+    form ul li.active{
+    	background-color:#8ec16d;
+    }
+
+    div.total{
+    	border-top:1px solid rgba(255,255,255,0.5);
+    	padding:15px 30px;
+    	font-size:20px;
+    	font-weight:bold;
+    	text-align: left;
+    	color:#fff;
+    }
+
+    div.total span{
+    	float:right;
+    }
+
+    div.infos{
+        padding: 100px 0;
+    }
+    </style>
+
+	</head>
+	<body>
+
+		<!-- <div class="container">
+    <h1 class="text-center">Exercice 1</h1>
+    <br><br>
+    <form id="main2" v-cloak>
+        <div class="row">
+            <div class='col-sm-6 offset-3'>
+                <label forid="dateDebut">Date début</label>
+                <input id="dateDebut" v-model="dateDebut"/>
+                <script>
+                    $('#dateDebut').datepicker({
+                        uiLibrary: 'bootstrap4'
+                    });
+                </script>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class='col-sm-6 offset-3'>
+                <label forid="dateFin">Date fin</label>
+                <input id="dateFin" v-model="dateFin"/>
+                <script>
+                    $('#dateFin').datepicker({
+                        uiLibrary: 'bootstrap4'
+                    });
+                </script>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class='col-sm-6 offset-3'>
+                <label forid="nbHebdo">Nombre d'heure hebdo</label>
+                <input type="number" id="nbHebdo" class="form-control" v-model="nbHebdo"/>
+            </div>
+        </div>
+        <br>
+
+        <div class="infos">
+
+          
+
+            Total: <span>{{total() | currency}}</span>
+            
+        </div>
+
+    </form>
+</div> -->
+
+		<!-- v-cloak hides any un-compiled data bindings until the Vue instance is ready. -->
+
+		<h1 class="text-center">Exercice 1</h1>
+	    <br><br>
+	    <form id="main2" v-cloak>
+	    	<div class="row">
+	            <div class='col-sm-6 offset-3'>
+	                <label forid="dateDebut">Date début</label>
+					<input type="date" v-model="formData.dateDebut" id="dateDebut" />
+	            </div>
+        	</div>
+        	<br>
+        	<div class="row">
+	            <div class='col-sm-6 offset-3'>
+	                <label forid="dateFin">Date début</label>
+	                <input type="date" v-model="formData.dateFin" id="dateFin"/>
+	            </div>
+        	</div>
+        	<br>
+        	<div class="row">
+            	<div class='col-sm-6 offset-3'>
+	                <label forid="nbHebdo">Nombre d'heure hebdo</label>
+	                <input type="number" id="nbHebdo" class="form-control" v-model="formData.nbHebdo"/>
+	            </div>
+	        </div>
+
+
+			<div class="infos">
+				<label>Jours total de travail : {{daysBetween(tabData.dateDebut, tabData.dateFin)}}</label><br>
+				<label>ETP : {{etp(tabData.nbHebdo)}}</label><br>
+				<label>NB de congés : {{tabData.nbConges}}</label><br>
+				<label> NB D'heure total: </label>
+			</div>
+		</form>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.5/vue.min.js"></script>
+		<script>
+
+			// Define a custom filter called "currency".
+			// c'est ce qu'on affiche apres un pipe "|" , voici donc comment on en créé un
+			Vue.filter('currency', function (value) {
+				return '$' + value.toFixed(2);
+			});
+			var tabData = {};
+			tabData.dateDebut = new Date();
+			tabData.dateFin = new Date();
+			tabData.nbHebdo = 0;
+			tabData.nbConges = 0;
+			tabData.
+			var demo = new Vue({
+				el: '#main2',
+				data: {
+					formData: tabData					
+				},
+				methods: {
+					etp: function(e){
+						return (e/35).toFixed(1);
+					},
+					heureTotal: function(e){
+						return tabData.nbHebdo/7 ;
+					},
+					daysBetween: function( date1, date2 ) {
+						
+						var one_day=1000*60*60*24; 
+
+						var date1_ms =  new Date(date1).getTime();
+						var date2_ms =  new Date(date2).getTime();
+
+						if(date2_ms < date1_ms) return;
+
+						var difference_ms = date2_ms - date1_ms;
+
+						var laDiff = Math.round(difference_ms/one_day);
+						tabData.nbConges =  parseInt(Math.ceil(parseInt(laDiff/28) * 2.08))
+						
+						console.log( parseInt(Math.ceil(parseInt(laDiff/28) * 2.08)))
+						return laDiff;
+					},
+					jours: function(){
+					}
+				}
+			});
+
+		</script>
+	</body>
+</html>
